@@ -1,0 +1,41 @@
+
+spring:
+  application:
+    name: zuul
+
+  jpa:
+    generate-ddl: true
+    show-sql: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: https://ureka.cfapps.io/eureka
+
+server:
+  port: 8078
+
+producer:
+  ribbon:
+    ServerListRefreshInterval: 5000
+
+---
+spring:
+  profiles: dev
+
+security:
+  basic:
+    enabled: false
+
+zuul:
+  routes:
+    account:
+      url: http://accthost.cfapps.io/account
+    bene:
+      url: http://beneficiaryhost.cfapps.io/bene
+    customer:
+      url: http://custhost.cfapps.io/customer
+    payment:
+      url: http://pymnthost.cfapps.io/payment
